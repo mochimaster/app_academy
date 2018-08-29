@@ -1,3 +1,4 @@
+
 require "byebug"
 require_relative "board.rb"
 class Piece
@@ -15,7 +16,4 @@ class Piece
     self.pos
   end
   
-  
 
-  
-end 
