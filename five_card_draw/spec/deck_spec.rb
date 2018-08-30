@@ -2,7 +2,7 @@ require 'rspec'
 require 'deck'
 
 RSpec.describe Deck do 
-  subject (:deck) {Deck.new}
+  subject (:deck_obj) {Deck.new}
   let(:card) {double "card"}
   
   
@@ -19,8 +19,12 @@ RSpec.describe Deck do
   
   describe '#initialize' do 
     it 'it creates an instance of a deck' do
-      expect(deck.deck).to be_a(Array)
-      expect(deck.deck.length).to eq(52)
+      expect(deck_obj.deck).to be_a(Array)
+      expect(deck_obj.deck.length).to eq(52)
+    end
+    
+    it 'deck is shuffled' do
+      expect(deck_obj.deck).not_to eql(Deck.make_deck)
     end
     
   end 
