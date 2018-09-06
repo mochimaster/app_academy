@@ -39,7 +39,7 @@ def harrison_ford
   #   Actor.select(:id, :title, :name)
   #     .join(:movies)
   # 
-  
+  # 
   Movie
     .select(:id, :title)
     .joins(:actors)
@@ -62,6 +62,13 @@ def biggest_cast
   #
   # Find the id and title of the 3 movies with the
   # largest casts (i.e most actors)
+  
+  Movie
+    .select(:id, :title)
+    .joins(:castings)
+    .group('movies.id')
+    .order('COUNT(castings.actor_id) DESC')
+    .limit(3)
 
 end
 
@@ -78,6 +85,13 @@ def directed_by_one_of(them)
   #
   # Find the id and title of all the movies directed by one of 'them'.
 
+  Movie
+    .select(:id, :title)
+    .joins(:director)
+    .where(actors: { name: them})
+  
+  
+  
 end
 
 def movie_names_before_1940
@@ -92,4 +106,7 @@ def movie_names_before_1940
   #
   # Use pluck to find the title of all movies made before 1940.
 
+  Movie
+    .where('yr < 1940')
+    .pluck(:title)
 end
